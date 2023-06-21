@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>CsED</title>
+
+    <!-- Import Montserrat font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <!-- Normalize.css fixes lot of differences between browsers default styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css"/>
+
+    <!-- project wide styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/site.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/background.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/button.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/card.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/table.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/grid.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/utils.css') }}">
+
+    <!-- page specific styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
+</head>
+<body>
+<div class="card detailed-view">
+
+    <p>And here is a "detailed" kind of view:</p>
+    <div class="row">
+        {% for detail_in_show in show%}
+        <img src="{{ (detail_in_show['trailer'] | replace('youtube.com/watch?v=', 'i.ytimg.com/vi/')) ~ '/0.jpg' }}" alt="Movie poster"
+             class="poster col col-third">
+        <div class="col col-twothird">
+            <h2>{{detail_in_show["title"]}}</h2>
+            <p class="small grayed">{{detail_in_show["runtime"]}} <span class="separator">|</span>{{detail_in_show["genres_names"]}}  <span
+                    class="separator">|</span> 12 February 2016 (USA)</p>
+            <p>{{detail_in_show["overview"]}}</p>              
+        </div>
+    </div>
+
+
+    <div> 
+        <p><b>Stars:</b>
+            {%for actor in detail_in_show["actors_names"]%}
+
+        <p>&nbsp;<a href="#">{{actor["name"]}}</a></p>
+            {%endfor%}
+            {%endfor%}
+    </div>
+</div>
+
+<div class="card">
+    Seasons details
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Overview</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for season in show_seasons %}
+        <tr>
+            <td>{{ season.title }}</td>
+            <td>{{ season.overview }}</td>
+        </tr>
+            {% endfor %}
+</body>
+</html>

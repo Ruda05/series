@@ -1,0 +1,21 @@
+{% for show in shows %}
+<tr>
+  <td>
+    <a href="{{ url_for('show', id=show.id)}}">{{ show.title }}</a>
+  </td>
+  <td>{{ show.year.year }}</td>
+  <td>{{ show.runtime }}</td>
+  <td>{{ show.rating | round(1) }}</td>
+  <td>{{ show.genre_names }}</td>
+  <td>
+    {% if show.trailer %}
+    <a href="{{ show.trailer }}" target="_new">{{ show.trailer }}</a>
+    {% else %} No URL {% endif %}
+  </td>
+  <td>
+    {% if show.homepage %}
+    <a href="{{ show.homepage }}" target="_new">{{ show.homepage }}</a>
+    {% else %} No URL {% endif %}
+  </td>
+</tr>
+{% endfor %}
